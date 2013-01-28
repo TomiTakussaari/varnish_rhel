@@ -21,9 +21,13 @@
     varnish_rhel::vcl { '/etc/varnish/default.vcl':
       vcl_content => template('your-varnish-module/etc/varnish/default.vcl.erb')
     }
+    
+    varnish_rhel::vcl { '/etc/varnish/backend.vcl':
+      vcl_content => template('your-varnish-module/etc/varnish/backend.vcl.erb')
+    }
 
 The example above assumes that you have a Puppet module *your-varnish-module*
-with a template */etc/varnish/default.vcl.erb*.
+which has templates */etc/varnish/default.vcl.erb* and */etc/varnish/backend.erb*
 
 ## Install
 
