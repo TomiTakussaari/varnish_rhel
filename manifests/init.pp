@@ -1,8 +1,8 @@
 class varnish_rhel(
   $varnish_data_directory,
   $varnish_listen_port = 80,
-  $varnish_storage_size = "1G"
-  ) {
+  $varnish_storage_size = "1G",
+  $varnish_version = latest) {
   require varnish_rhel::rpm_repo
 
   File {
@@ -16,8 +16,9 @@ class varnish_rhel(
   }
 
   package { "varnish":
-    ensure  => latest,
-    require => File["$varnish_data_directory"]
+    ensure  => $varnish_version,
+    require => File["$varnish_data_directory"],
+    notify => Service["varnish"]
   }
 
   service { "varnish":
