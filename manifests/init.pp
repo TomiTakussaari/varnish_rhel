@@ -25,7 +25,8 @@ class varnish_rhel(
     ensure    => "running",
     hasstatus => true,
     enable    => true,
-    require   => Package["varnish"]
+    require   => Package["varnish"],
+    restart => "varnishd -C -f /etc/varnish/default.vcl > /dev/null && service varnish restart"
   }
 
   file { "varnish-sysconfig":
